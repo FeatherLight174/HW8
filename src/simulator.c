@@ -15,7 +15,7 @@ status_t allocate_page(Process *process, addr_t address,
   // TODO: Implement me!
   size_t temp = (address)>>OFFSET_BITS;
   size_t L1_page_num = temp >> L2_BITS;
-  size_t L2_page_num = temp && ((1<<L2_BITS)-1);
+  size_t L2_page_num = temp & ((1<<L2_BITS)-1);
 
   
 
@@ -23,7 +23,7 @@ status_t allocate_page(Process *process, addr_t address,
     process->page_table.entries[L1_page_num].entries = calloc(L2_PAGE_TABLE_SIZE, sizeof(PTE));
   }
   else{
-    return SUCCESS;
+    return ERROR;
   }
   if(process->page_table.entries[L1_page_num].entries[L2_page_num].valid == 1){
     return ERROR;
