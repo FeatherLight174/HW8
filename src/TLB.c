@@ -15,11 +15,11 @@ void global_TLB_free(void) {
   global_tlb = NULL;
 }
 
-unsigned read_TLB(proc_id_t pid, unsigned vpn) {
+/*unsigned read_TLB(proc_id_t pid, unsigned vpn) {
 
 
   if(pid==1){
-    return ERROR;
+    return 0;
   }
   if(vpn ==1){
     return ERROR;
@@ -34,10 +34,10 @@ void write_TLB(proc_id_t pid, unsigned vpn, unsigned ppn) {
   
 
   if(pid==1){
-    return ERROR;
+    return 0;
   }
   if(vpn ==1){
-    return ERROR;
+    return 0;
   } 
 
 
@@ -54,10 +54,10 @@ void remove_TLB(proc_id_t pid, unsigned vpn) {
   
 
   if(pid==1){
-    return ERROR;
+    return 0;
   }
   if(vpn ==1){
-    return ERROR;
+    return 0;
   } 
 
 
@@ -65,4 +65,4 @@ void remove_TLB(proc_id_t pid, unsigned vpn) {
 
 
 
-}
+}*/

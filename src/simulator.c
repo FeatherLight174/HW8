@@ -21,6 +21,9 @@ status_t allocate_page(Process *process, addr_t address,
   if(process->page_table.entries[L1_page_num].entries==NULL){
     process->page_table.entries[L1_page_num].entries = calloc(L2_PAGE_TABLE_SIZE, sizeof(PTE));
   }
+  else{
+    return ERROR;
+  }
 
   if(process->page_table.entries[L1_page_num].entries[L2_page_num].valid != 1){
     process->page_table.entries[L1_page_num].entries[L2_page_num].valid = 1;
@@ -38,11 +41,13 @@ status_t deallocate_page(Process *process, addr_t address) {
     return ERROR;
   }
 
-  if(address==1){
-    return ERROR;
-  }
 
   // TODO: Implement me!
+  
+
+
+
+
   return SUCCESS;
 }
 
