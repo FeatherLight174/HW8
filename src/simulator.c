@@ -17,13 +17,17 @@ status_t allocate_page(Process *process, addr_t address,
   size_t L1_page_num = temp >> L2_BITS;
   size_t L2_page_num = temp && ((1<<L2_BITS)-1);
   size_t frame_num = L1_page_num*L1_PAGE_TABLE_SIZE + L2_page_num;
-  if(frame_num>main_memory->size){
-    return ERROR;
+
+  
+  if(process->page_table.entries[L1_page_num].entries==NULL){
+    process->page_table.entries[L1_page_num].entries = calloc(L2_PAGE_TABLE_SIZE, sizeof(PTE));
   }
-  if(process->page_table.entries[L1_page_num].valid_count == 1){
-    return ERROR;
+
+  if(process->page_table.entries[L1_page_num].entries[L2_page_num].valid != 1){
+    process->page_table.entries[L1_page_num].entries[L2_page_num].valid = 1;
+    process->page_table.entries[L1_page_num].entries[L2_page_num].frame = physical_address;
   }
-  process->page_table.entries[L1_page_num].entries->frame=frame_num;
+  process->page_table.entries[L1_page_num].valid_count  +=1;
   return SUCCESS;
 }
 
