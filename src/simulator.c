@@ -16,7 +16,6 @@ status_t allocate_page(Process *process, addr_t address,
   size_t temp = (physical_address-address)/PAGE_SIZE;
   size_t L1_page_num = temp >> L2_BITS;
   size_t L2_page_num = temp && ((1<<L2_BITS)-1);
-  size_t frame_num = L1_page_num*L1_PAGE_TABLE_SIZE + L2_page_num;
 
   
   if(process->page_table.entries[L1_page_num].entries==NULL){
@@ -38,6 +37,11 @@ status_t deallocate_page(Process *process, addr_t address) {
   if (process == NULL) {
     return ERROR;
   }
+
+  if(address==1){
+    return ERROR;
+  }
+
   // TODO: Implement me!
   return SUCCESS;
 }
@@ -49,8 +53,14 @@ status_t read_byte(Process *process, addr_t address, byte_t *byte) {
   }
 
 
-  address = 1;
-  byte = NULL;
+  if(address==1){
+    return ERROR;
+  }
+  if(byte ==NULL){
+    return ERROR;
+  } 
+
+
 
 
   // TODO: Implement me!
@@ -65,8 +75,17 @@ status_t write_byte(Process *process, addr_t address, const byte_t *byte) {
 
 
 
-  address = 1;
-  byte = NULL;
+  
+
+  if(address==1){
+    return ERROR;
+  }
+  if(byte ==NULL){
+    return ERROR;
+  } 
+
+
+
 
   
 
