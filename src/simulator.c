@@ -13,13 +13,11 @@ status_t allocate_page(Process *process, addr_t address,
     return ERROR;
   }
   // TODO: Implement me!
-  size_t temp = (address)/PAGE_SIZE;
+  size_t temp = (physical_address-address)/PAGE_SIZE;
   size_t L1_page_num = temp >> L2_BITS;
   size_t L2_page_num = temp && ((1<<L2_BITS)-1);
 
-  if(temp<main_memory->size)  {
-    return ERROR;
-  }
+  
 
   if(process->page_table.entries[L1_page_num].entries==NULL){
     process->page_table.entries[L1_page_num].entries = calloc(L2_PAGE_TABLE_SIZE, sizeof(PTE));
@@ -28,10 +26,9 @@ status_t allocate_page(Process *process, addr_t address,
     return ERROR;
   }
 
-  if(process->page_table.entries[L1_page_num].entries[L2_page_num].valid != 1){
-    process->page_table.entries[L1_page_num].entries[L2_page_num].valid = 1;
-    process->page_table.entries[L1_page_num].entries[L2_page_num].frame = physical_address;
-  }
+  process->page_table.entries[L1_page_num].entries[L2_page_num].valid = 1;
+  process->page_table.entries[L1_page_num].entries[L2_page_num].frame = physical_address;
+  
   process->page_table.entries[L1_page_num].valid_count  +=1;
   return SUCCESS;
 }
