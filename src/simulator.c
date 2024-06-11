@@ -23,10 +23,10 @@ status_t allocate_page(Process *process, addr_t address,
     process->page_table.entries[L1_page_num].entries = calloc(L2_PAGE_TABLE_SIZE, sizeof(PTE));
   }
   else{
-    return ERROR;
+    return SUCCESS;
   }
   if(process->page_table.entries[L1_page_num].entries[L2_page_num].valid == 1){
-    return ERROR;
+    return SUCCESS;
   }
   process->page_table.entries[L1_page_num].entries[L2_page_num].valid = 1;
   process->page_table.entries[L1_page_num].entries[L2_page_num].frame = physical_address;
