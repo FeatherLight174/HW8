@@ -25,7 +25,9 @@ status_t allocate_page(Process *process, addr_t address,
   else{
     return ERROR;
   }
-
+  if(process->page_table.entries[L1_page_num].entries[L2_page_num].valid == 1){
+    return ERROR;
+  }
   process->page_table.entries[L1_page_num].entries[L2_page_num].valid = 1;
   process->page_table.entries[L1_page_num].entries[L2_page_num].frame = physical_address;
   
