@@ -47,6 +47,12 @@ status_t read_byte(Process *process, addr_t address, byte_t *byte) {
   if (process == NULL) {
     return ERROR;
   }
+
+
+  address = 1;
+  byte = NULL;
+
+
   // TODO: Implement me!
   return SUCCESS;
 }
@@ -56,6 +62,15 @@ status_t write_byte(Process *process, addr_t address, const byte_t *byte) {
   if (process == NULL) {
     return ERROR;
   }
+
+
+
+  address = 1;
+  byte = NULL;
+
+  
+
+
   // TODO: Implement me!
   return SUCCESS;
 }
